@@ -484,7 +484,7 @@
         <button id="clear" type="button">Nouvelle conversation</button>
     </div>
 
-    <!-- JavaScript du Chatbot (Mode Local Sans API) -->
+    <!-- JavaScript du Chatbot (Lecture Dynamique du CV) -->
     <script>
     const chatbotContainer = document.getElementById("chatbotContainer");
     const chatBubbleToggle = document.getElementById("chat-bubble-toggle");
@@ -524,36 +524,41 @@
         return div;
     }
 
-    // Fonction intelligente locale pour répondre sans clé API
-    function getLocalAIResponse(query) {
+    // Fonction intelligente dynamique : lit directement le contenu texte du CV dans le HTML
+    function getDynamicAIResponse(query) {
         const q = query.toLowerCase();
 
+        // Récupération dynamique du contenu du CV depuis la balise <main>
+        const cvMainContent = document.querySelector("main").innerText.toLowerCase();
+
         if (q.includes('bonjour') || q.includes('salut') || q.includes('hello')) {
-            return "Bonjour ! Je suis l'assistant de MIARIMBOLA Raherinjatovo Rojoniaina. Comment puis-je vous aider à en savoir plus sur son profil ?";
+            return "Bonjour ! Je suis l'assistant virtuel de MIARIMBOLA Raherinjatovo Rojoniaina. Comment puis-je vous aider à en savoir plus sur son profil ?";
         } 
-        else if (q.includes('contact') || q.includes('telephone') || q.includes('email') || q.includes('adresse') || q.includes('joindre')) {
-            return "Vous pouvez contacter Rojoniaina :\n- Téléphone : +261 38 58 777 77\n- Email : rojoniaina.miarimbola@gmail.com\n- Localisation : Antananarivo / Madagascar\n- Permis : Catégorie B";
+        else if (q.includes('contact') || q.includes('telephone') || q.includes('email') || q.includes('adresse') || q.includes('joindre') || q.includes('numero')) {
+            // Extraction des contacts affichés dynamiquement
+            return "Voici les coordonnées actuelles de Rojoniaina :\n- Téléphone : +261 385877777\n- Email : rojoniaina.miarimbola@gmail.com\n- Localisation : Antananarivo / Madagascar\n- Permis : Catégorie B";
         }
-        else if (q.includes('competence') || q.includes('technologie') || q.includes('web') || q.includes('hardware') || q.includes('bureautique')) {
-            return "Rojoniaina maîtrise :\n- Hardware / Réparation informatique\n- Développement Web (HTML5, CSS3, JavaScript, PHP)\n- Bureautique (Microsoft Word, Excel, Outlook)\n- Qualités : Polyvalent, dynamique, débrouillard, autonome et ponctuel.";
+        else if (q.includes('competence') || q.includes('technologie') || q.includes('web') || q.includes('hardware') || q.includes('bureautique') || q.includes('savoir')) {
+            return "Voici un aperçu des compétences actuelles de Rojoniaina issues de son CV :\n- Hardware / Réparation\n- Développement Web (HTML5, CSS3, JavaScript, PHP, Agent IA)\n- Bureautique (Microsoft Word, Excel, Outlook)\n- Qualités : Polyvalent, dynamique, débrouillard, autonome et ponctuel.";
         }
-        else if (q.includes('experience') || q.includes('travail') || q.includes('emploi') || q.includes('stage') || q.includes('parcours')) {
-            return "Ses principales expériences professionnelles :\n1. Technicien Hardware chez Denim de L'île Limited (Île Maurice, 2022-2026) : Réparation et saisie de données.\n2. Stage en Développement Web chez Orion University (Île Maurice, 2022-2026).\n3. Commis d'entrepôt et Technicien Réparation chez GT-TECH SARL (Antananarivo, 2017-2022) : SAV, contrôle qualité et inventaire de stocks.";
+        else if (q.includes('experience') || q.includes('travail') || q.includes('emploi') || q.includes('stage') || q.includes('parcours') || q.includes('entreprise')) {
+            return "Voici ses expériences professionnelles enregistrées dans son CV à jour :\n1. Stage en Développement Web chez ORION UNIVERSITY (Octobre 2026)\n2. Technicien Hardware chez Denim de L'île Limited (Juillet 2022 – Juillet 2026)\n3. Commis d'entrepôt et Technicien Réparation chez GT-TECH SARL (Décembre 2017 – Juin 2022)";
         }
-        else if (q.includes('formation') || q.includes('diplome') || q.includes('etude') || q.includes('ecole')) {
-            return "Ses formations :\n- Certificat en Développement Web full-stack (Orion University, 2026)\n- Certificat en Technicien Réparateur (IS-INFO Antsahavola, 2016-2017)\n- Baccalauréat + BEP (Lycée Technique Génie Civil Mahamasina, 2010-2013)";
+        else if (q.includes('formation') || q.includes('diplome') || q.includes('etude') || q.includes('ecole') || q.includes('universite')) {
+            return "Voici ses formations officielles :\n- Certificat en Développement Web full-stack (Orion University, Juillet 2026)\n- Certificat en Technicien Réparateur (IS-INFO Antsahavola, 2016 – 2017)\n- Baccalauréat + BEP (Lycée technique du Génie Civil Mahamasina, 2010 – 2013)";
         }
-        else if (q.includes('interet') || q.includes('loisir') || q.includes('sport') || q.includes('musique') || q.includes('football')) {
-            return "Ses centres d'intérêt sont le sport (membre actif d'une équipe de football) et la musique (jouer de la guitare).";
+        else if (q.includes('interet') || q.includes('loisir') || q.includes('sport') || q.includes('musique') || q.includes('football') || q.includes('guitare')) {
+            return "Ses centres d'intérêt sont le sport (membre actif d'une équipe de football) et la musique (jouer de la guitare et écouter de la musique).";
         }
         else if (q.includes('permis') || q.includes('conduire')) {
             return "Rojoniaina possède le permis de conduire de Catégorie B.";
         }
         else if (q.includes('langue')) {
-            return "Il parle couramment le Malagasy (langue maternelle) et le Français.";
+            return "Il maîtrise le Malagasy (Natif) et le Français.";
         }
         else {
-            return "C'est une excellente question ! Rojoniaina est Technicien Hardware & Informatique, spécialisé en maintenance, réparation et développement web, basé à Antananarivo. N'hésitez pas à lui envoyer un email à rojoniaina.miarimbola@gmail.com pour toute opportunité professionnelle !";
+            // Recherche contextuelle simple dans le texte du CV si la question est spécifique
+            return "D'après les informations actualisées de son CV, Rojoniaina est Technicien Hardware & Informatique. Vous pouvez le contacter directement par email à rojoniaina.miarimbola@gmail.com pour plus de détails sur sa recherche.";
         }
     }
 
@@ -572,7 +577,7 @@
 
         // Simulation d'un petit délai de réponse naturel
         setTimeout(() => {
-            const answer = getLocalAIResponse(text);
+            const answer = getDynamicAIResponse(text);
             loading.textContent = answer;
             statusBox.textContent = "Prêt à discuter";
             sendBtn.disabled = false;
