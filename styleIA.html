@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Responsive</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Bouton pour ouvrir/fermer le chatbot -->
+    <button id="chatbot-toggle-btn" aria-label="Ouvrir le chat">💬</button>
+
+    <!-- Fenêtre du Chatbot -->
+    <div id="chatbot-container" class="closed">
+        <!-- En-tête -->
+        <div class="chatbot-header">
+            <h3>Assistant Virtuel</h3>
+            <button id="chatbot-close-btn" aria-label="Fermer le chat">✕</button>
+        </div>
+
+        <!-- Corps des messages -->
+        <div id="chatbot-messages">
+            <div class="message bot">Bonjour ! Comment puis-je vous aider aujourd'hui ?</div>
+        </div>
+
+        <!-- Zone de saisie -->
+        <form id="chatbot-form">
+            <input type="text" id="chatbot-input" placeholder="Écrivez votre message..." autocomplete="off" required>
+            <button type="submit">Envoyer</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

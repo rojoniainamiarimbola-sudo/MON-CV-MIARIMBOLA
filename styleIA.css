@@ -1,0 +1,26 @@
+/* 1. Style par défaut (Ordinateur / Grands écrans) */
+.chatbot-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 380px;
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+  /* Vos autres styles (bordures, ombres, etc.) */
+}
+
+/* 2. Style adaptatif pour Mobile (écrans de moins de 600px delargeur) */
+@media (max-width: 600px) {
+  .chatbot-container {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100dvh; /* Utilise dvh pour éviter les bugs avec la barre d'adresse mobile */
+    max-height: 100dvh;
+    border-radius: 0; /* Supprime les arrondis pour prendre tout l'écran */
+    box-shadow: none;
+  }
+}
